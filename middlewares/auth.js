@@ -5,7 +5,7 @@ const User=require("../models/User");
 //auth
 exports.auth=async(req,res,next)=>{
     try {
-        const token=req.cookies.token||req.body.token||req.header("Authorisation").replace("Bearea ","");
+        const token=req.cookies.token||req.body.token||req.header("Authorisation").replace("Bearer ","");
         if(!token){
             return res.status(400).json({
                 success:false,
