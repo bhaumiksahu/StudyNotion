@@ -1,7 +1,7 @@
-const Tag=require("../models/Tag");
+const Category=require("../models/Category");
 
 //creating tag
-exports.createTag=async(req,res)=>{
+exports.createCategory=async(req,res)=>{
     try {
         const{name,description}=req.body;
         if(!name || !description){
@@ -10,13 +10,13 @@ exports.createTag=async(req,res)=>{
                 message:"All fields are required",
             })
         }
-        const tag=await Tag.create({
+        const category=await Category.create({
             name:name,
             description:description,
         })
         return res.status(200).json({
             success:true,
-            message:"Tag created successfully"
+            message:"Category created successfully"
         }) 
     } 
     catch(error){
@@ -28,18 +28,18 @@ exports.createTag=async(req,res)=>{
 }
 
 //show all tag
-exports.showAllTag=async(req,res)=>{
+exports.showAllCategory=async(req,res)=>{
     try {
-       const allTag=await Tag.find({},{name:true},{description:true});
+       const allCategory=await Category.find({},{name:true},{description:true});
        return res.status(200).json({
         success:true,
-        message:"All tags returned Successful"
+        message:"All Category returned Successful"
        }) ;
     } 
     catch(error){
         return res.status(500).json({
             success:false,
-            message:"tags not found"
+            message:"Category not found"
            });
     }
 }

@@ -1,16 +1,16 @@
 const Course=require("../models/Course");
-const Tag=require("../models/Tag");
+const Category=require("../models/Category");
 const User=require("../models/User");
 const {uploadImage}=require("../utils/imageUploader");
 
 //createCourse
 exports.createCourse=async(req,res)=>{
     try {
-        const {price,tag,courseName,courseDescription,whatYouWillLearn}=req.body;
+        const {price,category,courseName,courseDescription,whatYouWillLearn}=req.body;
 
         const{thumbnail}=req.files.thumbnailImage;
 
-    if(!courseName || !courseDescription||!whatYouWillLearn || !thumbnail || !price || !tag){
+    if(!courseName || !courseDescription||!whatYouWillLearn || !thumbnail || !price || !category){
         return res.status(400).json({
             success:false,
             message:"All fields are required",
@@ -25,9 +25,9 @@ exports.createCourse=async(req,res)=>{
             message:"Instructor not found",
         })
     }
-    const tagDetails=await Tag.findById({tag});
+    const CategoryDetails=await Category.findById({category});
 
-    if(!tagDetails){
+    if(!CategoryDetails){
         return res.status(404).json({
             success:false,
             message:"TagDetail Not Found",
@@ -40,7 +40,7 @@ exports.createCourse=async(req,res)=>{
         courseName,courseDescription,
         instructor:InstructorDetail._id,
         whatYouWillLearn,price,
-        tag:tagDetails._id,
+        category:CategoryDetails._id,
         thumbnail:thumbnailImage.secure_url
     })
     //add the new course to user schema of instructor
@@ -53,8 +53,8 @@ exports.createCourse=async(req,res)=>{
         {new:true}
     )
     //update tag schema
-    await Tag.findByIdAndUpdate
-    (   {_id:tagDetails._id},
+    await Category.findByIdAndUpdate
+    (   {_id:CategoryDetails._id},
         {
             $push:{
                 course:newCourse._id,
