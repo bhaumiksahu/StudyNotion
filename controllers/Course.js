@@ -17,7 +17,7 @@ exports.createCourse=async(req,res)=>{
         })
     }
     const userId=req.user.id;
-    const InstructorDetail=await User.findById({userId});
+    const InstructorDetail=await User.findById(userId);
 
     if(!InstructorDetail){
         return res.status(404).json({
@@ -25,12 +25,12 @@ exports.createCourse=async(req,res)=>{
             message:"Instructor not found",
         })
     }
-    const CategoryDetails=await Category.findById({category});
+    const CategoryDetails=await Category.findById(category);
 
     if(!CategoryDetails){
         return res.status(404).json({
             success:false,
-            message:"TagDetail Not Found",
+            message:"CategoryDetail Not Found",
         })
     }
     const thumbnailImage=await uploadImage(thumbnail,process.env.FOLDER_NAME);
