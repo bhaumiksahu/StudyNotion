@@ -2,6 +2,7 @@ const Course=require("../models/Course");
 const Category=require("../models/Category");
 const User=require("../models/User");
 const {uploadImage}=require("../utils/imageUploader");
+const { populate } = require("dotenv");
 
 //createCourse
 exports.createCourse=async(req,res)=>{
@@ -89,7 +90,48 @@ exports.getallCourse=async(req,res)=>{
             message:"Data Found of all courses",
         })
     } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:"cannot fetch course data",
+        })
+    }
+} 
+
+//courseDetail
+exports.courseDetailed=async(req,res)=>{
+    try {
+        const {courseId}=req.body;
+
+        const courseDetail=await Course.fin(
+            {_id:courseId}
+        ).populate({
+            path:"instructor",
+            populate:{
+                path:"additionalDetail"
+            }
+        })
+        .populate("category")
+        .populate("ratingAndReview")
+        .populate({
+            path:"courseContent",
+            populate:{
+                path:"subSection"
+            }
+        }).exec();
+        if(!courseDetail){
+            return res.status(400).json({
+                success:false,
+                message:"cannot fetch course data",
+            })
+        }
         return res.status(200).json({
+            success:true,
+            courseDetail,
+            message:" fetch course data",
+        })
+    } 
+    catch(error){
+        return res.status(500).json({
             success:false,
             message:"cannot fetch course data",
         })
