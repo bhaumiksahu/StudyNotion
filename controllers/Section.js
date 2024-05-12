@@ -70,7 +70,8 @@ exports.deleteSection=async(req,res)=>{
        //assuming getting id in params
        const{sectionId}=req.params;  
     
-       //do we need to delete from schema
+       //do we need to delete from course??
+       
        await Section.findByIdAndDelete(sectionId);
 
        return res.status(200).json({
