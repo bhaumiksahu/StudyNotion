@@ -102,9 +102,8 @@ exports.courseDetailed=async(req,res)=>{
     try {
         const {courseId}=req.body;
 
-        const courseDetail=await Course.fin(
-            {_id:courseId}
-        ).populate({
+        const courseDetail=await Course.find({_id:courseId})
+        .populate({
             path:"instructor",
             populate:{
                 path:"additionalDetail"

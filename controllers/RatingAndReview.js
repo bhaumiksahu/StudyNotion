@@ -1,14 +1,16 @@
 const Course=require("../models/Course");
 const RatingAndReview=require("../models/RatingAndReview")
 const mongoose=require("mongoose");
+const User = require("../models/User");
 exports.creatingRatingAndReview=async(req,res)=>{
     try{
         const userId=req.user.id;
+        const userDetail=await User.findById(userId);
         const {rating,review,courseId}=req.body;
         //check if user is enrolled or not
         const courseDetail=await Course.findOne({_id:courseId,
             userEnrolled:
-            {$elemMatch: {$eq:userId} },})
+            {$elemMatch: {$eq:userDetail._id} },})
         
         if(!courseDetail){
             return res.status(404).json({
@@ -17,7 +19,7 @@ exports.creatingRatingAndReview=async(req,res)=>{
             })
         }
         const alreadyReviewed=await RatingAndReview.findOne({
-            user:userId,
+            user:userDetail._id,
             course:courseId,
         });
         if(alreadyReviewed){
@@ -29,7 +31,7 @@ exports.creatingRatingAndReview=async(req,res)=>{
         const ratingReview=await RatingAndReview.create({
             rating,review,
             course:courseId,
-            user:userId,
+            user:userDetail._id,
         })
 
         await Course.findByIdAndUpdate(
@@ -39,7 +41,7 @@ exports.creatingRatingAndReview=async(req,res)=>{
                     RatingAndReview:ratingReview._id
                 }
             },
-            {new:true}
+            {new:true} 
         )
         return res.status(200).json({
             succes:true,
@@ -60,12 +62,13 @@ exports.creatingRatingAndReview=async(req,res)=>{
 exports.getAverageRating=async(req,res)=>{
     try {
        const {courseID}=req.body.courseId;
+       const courseDetail=await Course.findById(courseID);
        
        //cal avg rating
        const result=await RatingAndReview.aggregate([
         {
             $match:{
-                course:new mongoose.Types.ObjectId(courseID)
+                course:courseDetail._id,
             }
         },
         {
@@ -108,22 +111,7 @@ exports.getAllRatingAndReview=async(req,res)=>{
         path:"course",
         select:"courseName"
         }).exec();
-        const {courseID}=req.body.courseId;
-       
-    //cal avg rating
-        const result=await RatingAndReview.aggregate([
-        {
-            $match:{
-             course:new mongoose.Types.ObjectId(courseID)
-            }
-        },
-        {
-         $group:{
-             _id:null,
-             averageRating:{$avg:"$rating"}
-            }
-        }
-        ])
+        
         return res.status(200).json({
          succes:true,
          message:"All review fetch",
