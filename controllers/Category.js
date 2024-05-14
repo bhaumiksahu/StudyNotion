@@ -30,9 +30,10 @@ exports.createCategory=async(req,res)=>{
 //show all tag
 exports.showAllCategory=async(req,res)=>{
     try {
-       const allCategory=await Category.find({},{name:true},{description:true});
+       const allCategory=await Category.find({},{name:true,description:true});
        return res.status(200).json({
         success:true,
+        allCategory,
         message:"All Category returned Successful"
        }) ;
     } 
@@ -61,6 +62,7 @@ exports.categoryPageDetail=async(req,res)=>{
         //get course for different category
         const differentCategory=await Category.findById({_id:{$ne:categoryId}}).populate("course").exec();
         //top selling course
+        const topcourses=await Category.find({}).sort({course:"desc"});
 
         //res
         return res.status(200).json({

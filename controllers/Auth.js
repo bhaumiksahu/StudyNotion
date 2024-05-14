@@ -6,7 +6,7 @@ const Profile=require("../models/Profile");
 const jwt=require("jsonwebtoken")
 require("dotenv").config();
 // sendOTP
-exports.sendOTP=async (req,res)=>{
+exports.sendotp=async (req,res)=>{
     try {
         //fetch email from req body
         const {email}=req.body;
@@ -41,6 +41,7 @@ exports.sendOTP=async (req,res)=>{
         const otpBody=await OTP.create(payload);
         //return response
         res.status(200).json({
+            otpBody,
             success:true,
             message:"OTP sent successfully",
         });
@@ -55,7 +56,7 @@ exports.sendOTP=async (req,res)=>{
 }
 
 // signUP
-exports.signUp=async (req,res) =>{
+exports.signup=async (req,res) =>{
     try {
         //fetch the data from req body
         const{firstName,lastName,email,password,confirmPassword,accountType,otp,contactNumber}=req.body;
@@ -115,7 +116,7 @@ exports.signUp=async (req,res) =>{
         })
         return res.status(200).json({
             success:true,
-            user,
+            user:USER,
             message:"User is registered successful"
         })
     } 

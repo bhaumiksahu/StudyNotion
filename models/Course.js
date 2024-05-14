@@ -22,12 +22,10 @@ const CourseSchema= new mongoose.Schema({
     courseContent:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Section",
-        required:true,
     }],
     ratingReviews:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"RatingAndReview",
-        required:true,
     }],
     price:{
         type:Number,
@@ -40,16 +38,16 @@ const CourseSchema= new mongoose.Schema({
     userEnrolled:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        required:true,
     }],
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        required:true,
     },
     tag:{
         type:[String],
         required:true,
-    }
+    },
+    createdAt: { type: Date, default: Date.now },
+
 })
 
-exports.model=mongoose.model("Course",CourseSchema);
+module.exports=mongoose.model("Course",CourseSchema);

@@ -1,6 +1,6 @@
 const Section=require("../models/Section");
 const Course=require("../models/Course");
-
+const SubSection=require("../models/SubSection")
 exports.createSection=async(req,res)=>{
 try {
     //fetch the data
@@ -65,24 +65,48 @@ exports.updateSection=async(req,res)=>{
         })
     }
 }
-exports.deleteSection=async(req,res)=>{
+exports.deleteSection = async (req, res) => {
     try {
-       //assuming getting id in params
-       const{sectionId}=req.params;  
-    
-       //do we need to delete from course??
-       
-       await Section.findByIdAndDelete(sectionId);
-
-       return res.status(200).json({
-        success:true,
-        message:"Section deleted Successful",
-    })
-    }
-    catch(error){
-        return res.status(500).json({
-            success:false,
-            message:"failed to delete section",
+      const { sectionId, courseId } = req.body
+      await Course.findByIdAndUpdate(courseId, {
+        $pull: {
+          courseContent: sectionId,
+        },
+      })
+      const section = await Section.findById(sectionId)
+      console.log(sectionId, courseId)
+      if (!section) {
+        return res.status(404).json({
+          success: false,
+          message: "Section not found",
         })
+      }
+      // Delete the associated subsections
+      await SubSection.deleteMany({ _id: { $in: section.subSection } });
+  
+      await Section.findByIdAndDelete(sectionId)
+  
+      // find the updated course and return it
+      const course = await Course.findById(courseId)
+        .populate({
+          path: "courseContent",
+          populate: {
+            path: "subSection",
+          },
+        })
+        .exec()
+  
+      res.status(200).json({
+        success: true,
+        message: "Section deleted",
+        data: course,
+      })
+    } catch (error) {
+      console.error("Error deleting section:", error)
+      res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      })
     }
-}
+  }

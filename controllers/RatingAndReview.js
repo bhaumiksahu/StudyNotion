@@ -2,7 +2,7 @@ const Course=require("../models/Course");
 const RatingAndReview=require("../models/RatingAndReview")
 const mongoose=require("mongoose");
 const User = require("../models/User");
-exports.creatingRatingAndReview=async(req,res)=>{
+exports.createRating=async(req,res)=>{
     try{
         const userId=req.user.id;
         const userDetail=await User.findById(userId);
@@ -100,7 +100,7 @@ exports.getAverageRating=async(req,res)=>{
 }
 
 //getAllrating
-exports.getAllRatingAndReview=async(req,res)=>{
+exports.getAllRatingReview=async(req,res)=>{
     try{
         const getAll=await RatingAndReview.find({}).sort({rating:"desc"})
         .populate({
