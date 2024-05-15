@@ -89,7 +89,7 @@ const Home = () => {
               codeColor={"text-yellow-25"}
             />
         </div>
-        {/* codeSection 2 */}
+        {/* codeSection 2 --*/}
         <div >
           <CodeBlocks position={"lg:flex-row-reverse"}
           heading={
