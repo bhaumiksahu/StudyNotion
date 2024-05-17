@@ -16,7 +16,7 @@ const LearninglanguageSection = () => {
               and more.
             </div>
 
-            <div className='flex'>
+            <div className='flex flex-col lg:flex-row items-center justify-center mt-8 lg:mt-0'>
               <img src={Know_your_progress} alt='' className='-mr-32'/>
               <img src={Compare_with_others} alt="" />
               <img className='-ml-36' src={Plan_your_lessons} alt="" />

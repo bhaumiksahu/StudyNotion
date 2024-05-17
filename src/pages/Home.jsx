@@ -9,6 +9,7 @@ import TimelineSection from "../components/core/HomePage/TimelineSection"
 import LearninglanguageSection from "../components/core/HomePage/LearninglanguageSection"
 import Instructor from '../components/core/HomePage/Instructor';
 import Explore from '../components/core/HomePage/Explore';
+import Footer from "../components/common/Footer"
 const Home = () => {
   return (
     <div>
@@ -47,14 +48,14 @@ const Home = () => {
 
         {/* video part */}
         <div className='shadow-blue-200 mx-3 my-14 shadow-[10px_-5px_30px_-5px]'>
-           <video className="shadow-[10px_5px_rgba(255,255,255)] h-[350px]  " muted loop autoPlay>
+           <video className="shadow-[10px_5px_rgba(255,255,255)] lg:h-[550px]  " muted loop autoPlay>
             <source src={Banner}/>
            </video>
         </div>
 
         {/* codeSection 1 */}
         <div>
-            <CodeBlocks position={"lg:flex"} heading={
+            <CodeBlocks position={"lg:flex-row flex-col"} heading={
                 <div className='text-4xl font-semibold'>
                   Unlock Your
                   <HighlightText text={" coding potential "}/>
@@ -101,7 +102,7 @@ const Home = () => {
         </div>
         {/* codeSection 2 --*/}
         <div >
-          <CodeBlocks position={"lg:flex-row-reverse"}
+          <CodeBlocks position={"lg:flex-row-reverse flex-col"}
           heading={
             <div className='text-4xl font-semibold '>
               Start 
@@ -150,11 +151,11 @@ const Home = () => {
       </div>
 
       {/* Section 2 */}
-      <div className='bg-pure-greys-5 text-richblack-700'>
+      <div className='bg-pure-greys-5 text-richblack-700 '>
           {/* part 1 */}
-          <div className='homePage_bg h-[300px]'>
+          <div className='homePage_bg lg:h-[300px] h-[150px]'>
               <div className='w-11/12 max-w-maxContent flex items-center gap-5 mx-auto justify-center'>
-                <div className='h-[300px]'></div>
+                <div className='lg:h-[500px] h-[150px]'></div>
                 <div className=' flex gap-7 text-white justify-center item'>
                   <CTAButton linkto={"/signup"} active={true}
                   >
@@ -171,17 +172,17 @@ const Home = () => {
           </div>
 
           {/* part-2 */}
-          <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
+          <div className="mx-auto flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 ">
 
             {/* flex-row */}
-            <div className='flex gap-5 justify-between mb-10 mt-[40px]'>
-              <div className='text-4xl font-semibold w-[45%]'>
+            <div className='lg:flex  gap-5 justify-between mb-10 mt-[40px]'>
+              <div className='text-4xl font-semibold lg:w-[45%] w-[90%]'>
               Get the Skills you need for a
               <HighlightText text={" Job that is in demand "}/>
               </div>
               
-              <div className='flex flex-col gap-10 w-[40%] items-start'>
-               <div className='text-[16px]'>
+              <div className='flex flex-col gap-10 lg:w-[45%] w-[90%] items-start'>
+               <div className='text-[16px] mt-4 lg:mt-0 '>
                 The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
                 </div>
                 <CTAButton active={true} linkto={"/signup"}>
@@ -213,6 +214,9 @@ const Home = () => {
 
 
       {/* Footer */}
+      <div>
+          <Footer/>
+      </div>
     </div>
   )
 }

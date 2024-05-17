@@ -7,9 +7,9 @@ const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeB
     return(
         <div className={`flex ${position} my-20 justify-between gap-10`}>
             {/* Section 1 */}
-            <div className="w-[50%] flex flex-col gap-8">
+            <div className="lg:w-[50%] flex flex-col gap-8 w-[90%] ">
                 {heading}
-                <div className="text-richblack-300 font-bold">
+                <div className="text-richblack-300 font-bold md:w-[90%]">
                     {subheading}
                 </div>
                 <div className="flex gap-7 mt-7">

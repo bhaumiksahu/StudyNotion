@@ -30,9 +30,9 @@ const timeline = [
 const TimelineSection = () => {
   return (
     <div>
-       <div className='flex gap-15 items-center justify-between'>
+       <div className='lg:flex gap-15 justify-between items-center'>
           
-           <div className='w-[45%] flex flex-col gap-5'>
+           <div className='lg:w-[45%] flex flex-col gap-5 '>
              {/* <div className='h-10'> </div> */}
               { 
                 timeline.map((ele,index)=>{
@@ -59,7 +59,7 @@ const TimelineSection = () => {
               }
            </div>
             
-            <div className='relative'>
+            <div className='relative mt-8 lg:mt-0'>
                 <div className="  shadow-blue-200 shadow-[0px_0px_30px_0px]">
                    <div className="absolute lg:left-[50%] lg:bottom-0 lg:translate-x-[-50%] lg:translate-y-[50%] bg-caribbeangreen-700 flex lg:flex-row flex-col text-white uppercase py-5 gap-4 lg:gap-0 lg:py-6 ">
                       {/* Section 1 */}
@@ -80,7 +80,7 @@ const TimelineSection = () => {
                     </div>
                 </div>
                 <div className='shadow-blue-200 shadow-[0px_-1px_30px_-1px]'>
-                   <img className='shadow-[10px_5px_rgba(255,255,255)] ' src={timelineImg} alt=''/> 
+                   <img className='shadow-[10px_5px_rgba(255,255,255)] h-[400px] lg:h-fit' src={timelineImg} alt=''/> 
                 </div>
             </div>
            
