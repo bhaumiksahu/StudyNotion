@@ -5,6 +5,10 @@ import HighlightText from "../components/core/HomePage/HighlightText"
 import CTAButton from "../components/core/HomePage/Button"
 import Banner from "../assets/Images/banner.mp4"
 import CodeBlocks from '../components/core/HomePage/CodeBlocks';
+import TimelineSection from "../components/core/HomePage/TimelineSection"
+import LearninglanguageSection from "../components/core/HomePage/LearninglanguageSection"
+import Instructor from '../components/core/HomePage/Instructor';
+import Explore from '../components/core/HomePage/Explore';
 const Home = () => {
   return (
     <div>
@@ -43,7 +47,7 @@ const Home = () => {
 
         {/* video part */}
         <div className='shadow-blue-200 mx-3 my-14 shadow-[10px_-5px_30px_-5px]'>
-           <video className="shadow-[20px_10px_rgba(255,255,255)]" muted loop autoPlay>
+           <video className="shadow-[10px_5px_rgba(255,255,255)] h-[350px]  " muted loop autoPlay>
             <source src={Banner}/>
            </video>
         </div>
@@ -73,7 +77,7 @@ const Home = () => {
                   active:false
                 }
               }
-              const codeBlockStyle ={ {
+               codeBlockStyle ={ {
                 borderRadius: '100%',
                 filter: 'blur(34px)',
                 height: '250px',
@@ -84,7 +88,13 @@ const Home = () => {
                 position:"absolute",
                 background: 'linear-gradient(123.77deg, #8a2be2 -6.46%, orange 59.04%, #f8f8ff 124.53%)'
             }}
-           
+                border={
+                { 
+                  border:"2px solid rgb(72,72,72)",
+                  padding:"11px",
+                  background:"linear-gradient(111.93deg, rgba(14, 26, 45, .24) -1.4%, rgba(17, 30, 50, .38) 104.96%)"
+                }
+              }
               codeblock={`<!DOCTYPE html>\n <html lang="en">\n<head>\n<title>This is myPage</title>\n</head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav> <a href="/one">One</a> <a href="/two">Two</a> <a href="/three">Three</a>\n</nav>\n</body>`}
               codeColor={"text-yellow-25"}
             />
@@ -126,21 +136,79 @@ const Home = () => {
             position:"absolute",
             background: 'linear-gradient(118.19deg, #1fa2ff -3.62%, #12d8fa 50.44%, #a6ffcb 104.51%)'
         }}
+        border={
+          { 
+            border:"2px solid rgb(72,72,72)",
+            padding:"11px",
+            background:"linear-gradient(111.93deg, rgba(14, 26, 45, .24) -1.4%, rgba(17, 30, 50, .38) 104.96%)"
+          }}
           codeblock={`import React from "react";\n import CTAButton from "./Button";\nimport TypeAnimation from "react-type";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => {\nreturn (\n<div>Home</div>\n)\n}\nexport default Home;`}
           />
         </div>
+
+        <Explore/>
       </div>
 
-        
-
-
       {/* Section 2 */}
+      <div className='bg-pure-greys-5 text-richblack-700'>
+          {/* part 1 */}
+          <div className='homePage_bg h-[300px]'>
+              <div className='w-11/12 max-w-maxContent flex items-center gap-5 mx-auto justify-center'>
+                <div className='h-[300px]'></div>
+                <div className=' flex gap-7 text-white justify-center item'>
+                  <CTAButton linkto={"/signup"} active={true}
+                  >
+                  <div className='flex items-center gap-3'>
+                    Explore Full Catalog
+                    <FaArrowRight/>
+                  </div>
+                  </CTAButton>
+                  <CTAButton active={false} linkto={"/login"}>
+                    Learn More
+                  </CTAButton>
+                </div>
+              </div>
+          </div>
 
+          {/* part-2 */}
+          <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
 
+            {/* flex-row */}
+            <div className='flex gap-5 justify-between mb-10 mt-[40px]'>
+              <div className='text-4xl font-semibold w-[45%]'>
+              Get the Skills you need for a
+              <HighlightText text={" Job that is in demand "}/>
+              </div>
+              
+              <div className='flex flex-col gap-10 w-[40%] items-start'>
+               <div className='text-[16px]'>
+                The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+                </div>
+                <CTAButton active={true} linkto={"/signup"}>
+                Learn More
+               </CTAButton>
 
+              </div>
+              
+             </div>
+             <TimelineSection />
+
+             <LearninglanguageSection />
+          </div>
+
+         
+
+      </div>
 
       {/* Section 3 */}
+      <div className='w-11/12 mx-auto max-w-maxContent flex-col items-center justify-between gap-8 first-letter bg-richblack-900 text-white'>
 
+         <Instructor/>
+
+         <h2 className='text-center text-4xl font-semibold mt-10'>review from other Learners</h2>
+
+
+      </div>
 
 
 

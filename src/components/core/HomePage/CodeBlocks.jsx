@@ -3,7 +3,7 @@ import CTAButton from "../HomePage/Button"
 //import HighlightText from "./HighlightText";
 import { FaArrowRight } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
-const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeBlockStyle,codeColor}) =>{
+const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeBlockStyle,codeColor,border}) =>{
     return(
         <div className={`flex ${position} my-20 justify-between gap-10`}>
             {/* Section 1 */}
@@ -27,7 +27,7 @@ const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeB
                 </div>
             </div>
             {/* Section 2 */}
-            <div className="flex h-fit text-10 w-[100%] relative lg:w-[500px] ">
+            <div className={`flex h-fit text-10 w-[100%] relative lg:w-[500px] `} style={border}>
                 
                 <div className="flex flex-col w-[10%] text-richblack-400 font-inter font-bold">
                     <p>1</p>
@@ -43,7 +43,7 @@ const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeB
                     <p>11</p>
                 </div>
                 <div className={`w-[95%] flex-col gap-2 font-bold font-mono pr-2 ${codeColor} `}>
-                    <div className="absolute" style={codeBlockStyle}>
+                    <div  style={codeBlockStyle}>
                     </div>
                     <TypeAnimation
                         sequence={[codeblock,1000,""]}
@@ -52,7 +52,7 @@ const CodeBlocks = ({position,heading,subheading,ctabtn1,ctabtn2,codeblock,codeB
                         style={
                             {
                                 whiteSpace:"pre-line",
-                                display:"block"
+                                // display:"block"
                             }
                        } 
                         omitDeletionAnimation={true}

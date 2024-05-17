@@ -6,3 +6,7 @@
 html,body{
     overflow-x: hidden;
 }
+
+.homePage_bg{
+    background:"../src/assets/Images/bghome.de04eae287ff1d29f0b1.svg";
+}
