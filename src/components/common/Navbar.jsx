@@ -49,7 +49,7 @@ const Navbar = () => {
             {NavbarLinks.map((link, index) => (
               <li key={index}>
                 {link.title === "Catalog" ? (
-                  <>
+                  
                     <div
                       className={`group relative flex cursor-pointer items-center gap-1 ${
                         matchRoute("/catalog/:catalogName")
@@ -64,7 +64,7 @@ const Navbar = () => {
                         {loading ? (
                           <p className="text-center">Loading...</p>
                         ) : subLink?.length ? (
-                          <>
+                          <div>
                             {subLink
                               ?.map((subLink, i) => (
                                 <Link
@@ -78,13 +78,13 @@ const Navbar = () => {
                                   <p>{subLink.name}</p>
                                 </Link>
                               ))}
-                          </>
+                          </div>
                         ) : (
                           <p className="text-center">No Courses Found</p>
                         )}
                       </div>
                     </div>
-                  </>
+                  
                 ) : (
                   <Link to={link?.path}>
                     <p
