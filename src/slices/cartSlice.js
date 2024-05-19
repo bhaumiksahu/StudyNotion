@@ -8,7 +8,7 @@ const cartSlice = createSlice({
     initialState:initialState,
     reducers:{
         settotalItem (value,state){
-            state.totalItem=value.payload
+            state.totalItem=value.payload;
         }
     }
 })
