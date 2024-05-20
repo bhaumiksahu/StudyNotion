@@ -72,10 +72,10 @@ const Navbar = () => {
                                     .split(" ")
                                     .join("-")
                                     .toLowerCase()}`}
-                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                    className="rounded-lg bg-transparent mt-4 pl-4 hover:text-richblack-600"
                                   key={i}
                                 >
-                                  <p>{subLink.name}</p>
+                                  <p className="">{subLink.name}</p>
                                 </Link>
                               ))}
                           </div>
