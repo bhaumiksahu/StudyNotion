@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { resetPassword } from '../services/operations/authAPI'
 import { BiArrowBack } from 'react-icons/bi'
-
+import loadingImg from "../assets/Images/loading.gif"
 const UpdatePassword = () => {
 
 const dispatch=useDispatch()
@@ -31,11 +31,15 @@ const handleOnSubmit = (e)=>{
     const token=location.pathname.split("/").at(-1);
     console.log(token)
     dispatch(resetPassword(password,confirmPassword,token))
+    setFormData({
+        password:"",
+        confirmPassword:""
+    })
 }
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         {
-            loading?(<p>loading..</p>):(
+            loading?(<div className='flex items-center justify-center'><img src={loadingImg} alt="" className='h-[200px] w-[200px] mt-6 ' /></div>):(
                 <div className="max-w-[500px] p-4 lg:p-8">
                     <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">Change New Password</h1>
                     <p className="my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">Almost done, Enter your password and yours all set</p>
@@ -84,7 +88,7 @@ const handleOnSubmit = (e)=>{
                     <Link to="/login">
                        <p className="flex items-center gap-x-2 text-richblack-5"><BiArrowBack />Back to login</p>
                     </Link>
-            </div>
+                    </div>
                 </div>
             )
         }

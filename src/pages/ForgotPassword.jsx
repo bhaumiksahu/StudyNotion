@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
       {
         loading ? (
-         <div><img src={loadingImg} alt="" className='h-[200px] w-[200px]' /></div>   
+         <div className='flex items-center justify-center'><img src={loadingImg} alt="" className='h-[200px] w-[200px] -mt-9' /></div>   
       ):(
         <div className="max-w-[500px] p-4 lg:p-8">
             <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
@@ -39,7 +39,6 @@ const ForgotPassword = () => {
                             onChange={(e)=>setEmail(e.target.value)}
                             placeholder='Enter your Email Address'
                             className="rounded-lg bg-richblack-700 p-3 text-[16px] leading-[24px] text-richblack-5 shadow-[0_1px_0_0] shadow-white/50 placeholder:text-richblack-400 focus:outline-none w-full"
-                            
                             />
                         </label>
                     )

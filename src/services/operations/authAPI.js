@@ -3,6 +3,51 @@ import { setLoading } from "../../slices/authSlice"
 import { apiConnector } from "../apiconnector";
 import { endPoint } from "../apis";
 
+
+export const signUp=(firstName,lastName,email,password,confirmPassword,accountType,otp,navigate)=>{
+        return async (dispatch)=>{
+            dispatch(setLoading(true))
+            //const toastId=toast.loading("loading...");
+            try {
+                const response=await apiConnector("POST",endPoint.SIGNUP_API,{
+                    firstName,lastName,email,password,confirmPassword,accountType,otp
+                })
+                if(!response.data.success){
+                    throw new Error(response.data.message)
+                }
+                toast.success("Signup successful")
+                navigate("/login")
+            }catch(error){
+                console.log("SIGNUP API ERROR............", error)
+                toast.error("Signup Failed")
+                navigate("/signup")
+            }
+            //toast.dismiss(toastId)
+            dispatch(setLoading(false));
+        }
+}
+
+export const sentOtp=(email,navigate)=>{
+    return async (dispatch)=>{
+        dispatch(setLoading(true))
+       // const toastId=toast.loading("Loading..");
+        try {
+            const response=await apiConnector("POST",endPoint.SENDOTP_API,{email});
+            if(!response.data.success){
+               // throw new Error(response.data.message) 
+               toast.error(response.data.message)  
+
+            }
+            toast.success("OTP Sent successfully")
+            navigate("/verify-email")
+        }catch(error){
+            toast.error(error.message)
+        }
+        dispatch(setLoading(false));
+        //toast.dismiss(toastId)
+    }
+}
+
 export const getPasswordResetToken=(email,setEmailSent)=>{
     return async (dispatch)=>{
         dispatch(setLoading(true));
@@ -34,7 +79,7 @@ export const resetPassword=(password,confirmPassword,token)=>{
         toast.success("Password Reset successfully")
     }
      catch (error) {
-        toast.error("fail to sent otp while resetting password")
+        toast.error("fail to reset password")
         console.log("reset failed")
         console.log(error.message);
     }
